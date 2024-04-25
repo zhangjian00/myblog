@@ -1,16 +1,65 @@
 ---
-title: 'First post'
+title: '常用命令'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+pubDate: 'Apr 25 2024'
 heroImage: '/myblog/blog-placeholder-3.jpg'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+## 1. tcpdump
+经典的抓包命令，提供了大量的选项，用来过滤数据包或者定制输出格式。
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+## 2. lsof
+列出当前系统打开的文件描述符的工具。
+常用选项：
+```shell
+lsof -i   //显示所有 socket 文件描述符
+```
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+## 3. nc
+nc(netcat)命令短小精悍、功能强大。它主要被用来快速构建网络连接。可以让它以服务器方式运行，也可让它以客户端方式运行。
+```
+-i 设置数据包传送的事件间隔
+-l 以服务器的方式运行，监听指定的端口。nc命令默认以客户端方式运行
+-k 重复接受并处理某个端口上的所有连接，必须与-l选项一起使用
+-n 使用IP地址表示主机，而不是主机名；使用数字表示端口号，而不是服务名称
+-p 当nc命令以客户端方式运行时，强制其使用指定的端口号。
+-U 使用Unix本地域协议通信
+-u 使用UDP协议。nc命令默认使用传输层协议时TCP协议
+-z 扫描目标机器上的某个或某些服务是否开启（端口扫描）。
+```
+例子：
+```
+nc -z 127.0.0.1 20-50  //扫描20-50 端口是否开启
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+nc 127.0.0.1 8888      //连接服务器并发送数据
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+nc -l 8888             //服务器监听8888端口
+```
+
+## 4. strace 
+strace是测试服务器性能的重要工具。可以跟踪程序运行过程中执行的系统调用和接受到的信号，并将系统调用名、参数、返回值、及信号名输出到标准输出或者指定的文件。
+
+常用选项：
+```shell
+-c //统计每个系统调用执行时间、执行次数和出错次数
+-f //跟踪由fork调用生成的子进程
+-t //在输出的每一行信息前加上时间信息
+-o //将strace 的输出写入指定的文件
+
+```
+
+## 5. netstat
+
+netstat 是一个功能强大的网络信息统计工具
+可以打印本地网卡接口上的全部连接、路由表信息、网卡接口信息等
+
+常用选项：
+```shell
+-n 使用IP地址表示主机，而不是主机名；使用数字表示端口号，而不是服务名称
+-a 显示结果中也包含监听socket
+-t 仅显示TCP连接
+-r 显示路由信息
+-p 显示socket所属的进程的PID和名字
+
+常用组合 natstat -nat
+```
