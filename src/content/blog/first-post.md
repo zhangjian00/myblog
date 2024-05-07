@@ -7,9 +7,31 @@ heroImage: '/myblog/blog-placeholder-3.jpg'
 
 ## 1. tcpdump
 经典的抓包命令，提供了大量的选项，用来过滤数据包或者定制输出格式。
+比如指定网卡：
+```shell
+tcpdump -i ens33
+```
+再比如指定来源：
+```shell
+tcpdump src host hostname
+比如：
+tcpdump src host 192.168.5.100   //将捕获192.168.5.100的所有数据包
+```
+
+再写一个例子：
+```shell
+tcpdump 'tcp and port 80 and src host 192.168.5.100'
+```
+这里抓TCP的包，且端口是80，包来自IP地址为192.168.5.100的主机地址
+
+```
+tcpdump 'tcp and port 80 and tcp[13:1]&2 != 0'
+```
+这里tcp[13:1]表示的是TCP头部开始处偏移13字节，如果这个值为2，说明设置了SYN分节。
 
 ## 2. lsof
 列出当前系统打开的文件描述符的工具。
+常见的用途是，帮助我们找出指定的IP地址或者端口打开套接字的进程
 常用选项：
 ```shell
 lsof -i   //显示所有 socket 文件描述符
@@ -60,6 +82,9 @@ netstat 是一个功能强大的网络信息统计工具
 -t 仅显示TCP连接
 -r 显示路由信息
 -p 显示socket所属的进程的PID和名字
+-l 仅显示监听套接字
+-e 显示附加信息
 
-常用组合 natstat -nat
+常用组合 netstat -nat
+netstat -alepn
 ```
