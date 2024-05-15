@@ -2,6 +2,7 @@
 title: '路由和寻址' 
 description: 'Lorem ipsum dolor sit amet' 
 pubDate: 'May 15 2024'  
+heroImage: '/myblog/blog-placeholder-4.jpg'
 ---
 
 
