@@ -1,0 +1,307 @@
+---
+title: '卷积神经网络' 
+description: 'Lorem ipsum dolor sit amet' 
+pubDate: 'Oct 7 2024'  
+heroImage: '/myblog/blog-placeholder-4.jpg'
+---
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W25Q128存储结构图</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .memory-structure {
+            display: flex;
+            margin-bottom: 40px;
+        }
+        .level {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+        }
+        .chip {
+            background-color: #e1f5fe;
+            border: 2px solid #03a9f4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .block {
+            background-color: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .sector {
+            background-color: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .page {
+            background-color: #fce4ec;
+            border: 2px solid #e91e63;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .address {
+            color: #555;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .size {
+            font-size: 0.9em;
+        }
+        .total {
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #555;
+            z-index: 1;
+        }
+        .info-section {
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background-color: #ffecb3;
+        }
+        .interactive-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            border: 1px solid #bbdefb;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+        }
+        button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #0b7dda;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+            display: none;
+        }
+        .zoom-container {
+            position: relative;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+        .zoomable {
+            transition: transform 0.3s ease;
+        }
+        .zoomable:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>W25Q128闪存存储结构图</h1>
+
+        <div class="info-section">
+            <h2>W25Q128基本信息</h2>
+            <ul>
+                <li>总容量：16MB</li>
+                <li>使用24位地址线，地址范围：0x000000~0xFFFFFF</li>
+                <li>块数量：256个，每个块大小：64KB</li>
+                <li>扇区数量：4096个，每个扇区大小：4KB</li>
+                <li>页数量：65536个，每个页大小：256字节</li>
+            </ul>
+        </div>
+
+        <div class="zoom-container">
+            <div class="memory-structure zoomable">
+                <div class="level">
+                    <div class="chip">
+                        <div class="title">W25Q128芯片</div>
+                        <div class="address">地址范围: 0x000000~0xFFFFFF</div>
+                        <div class="size">总容量: 16MB</div>
+                        <div class="total">1个芯片</div>
+                        <div class="arrow">→</div>
+                    </div>
+                </div>
+                <div class="level">
+                    <div class="block">
+                        <div class="title">块 (Block)</div>
+                        <div class="address">块内偏移: 0x0000~0xFFFF</div>
+                        <div class="size">大小: 64KB</div>
+                        <div class="total">共256个块</div>
+                        <div class="arrow">→</div>
+                    </div>
+                </div>
+                <div class="level">
+                    <div class="sector">
+                        <div class="title">扇区 (Sector)</div>
+                        <div class="address">扇区内偏移: 0x000~0xFFF</div>
+                        <div class="size">大小: 4KB</div>
+                        <div class="total">每块16个扇区，共4096个扇区</div>
+                        <div class="arrow">→</div>
+                    </div>
+                </div>
+                <div class="level">
+                    <div class="page">
+                        <div class="title">页 (Page)</div>
+                        <div class="address">页内偏移: 0x00~0xFF</div>
+                        <div class="size">大小: 256字节</div>
+                        <div class="total">每扇区16个页，共65536个页</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>地址结构详解</h2>
+            <p>W25Q128使用24位地址线，地址结构如下:</p>
+            <table>
+                <tr>
+                    <th colspan="3">24位地址结构</th>
+                </tr>
+                <tr>
+                    <td>块地址 (8位)</td>
+                    <td>扇区地址 (4位)</td>
+                    <td>页地址 (4位) + 页内偏移 (8位)</td>
+                </tr>
+                <tr>
+                    <td>Bit 23-16</td>
+                    <td>Bit 15-12</td>
+                    <td>Bit 11-8 + Bit 7-0</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="interactive-section">
+            <h2>地址转换计算器</h2>
+            <div class="input-group">
+                <label>输入完整24位地址 (十六进制，例如：0x123456)：</label>
+                <input type="text" id="fullAddress" placeholder="例如：0x123456">
+                <button onclick="calculateAddress()">计算</button>
+            </div>
+            <div id="result"></div>
+        </div>
+
+        <script>
+            function calculateAddress() {
+                const fullAddressInput = document.getElementById('fullAddress').value.trim();
+                const resultDiv = document.getElementById('result');
+                
+                // 验证输入
+                let fullAddress;
+                if(fullAddressInput.startsWith('0x')) {
+                    fullAddress = parseInt(fullAddressInput.substring(2), 16);
+                } else {
+                    fullAddress = parseInt(fullAddressInput, 16);
+                }
+                
+                if(isNaN(fullAddress) || fullAddress < 0 || fullAddress > 0xFFFFFF) {
+                    resultDiv.innerHTML = '请输入有效的24位地址 (0x000000~0xFFFFFF)';
+                    resultDiv.style.display = 'block';
+                    return;
+                }
+                
+                // 计算各部分地址
+                const blockNum = (fullAddress >> 16) & 0xFF;
+                const sectorNum = (fullAddress >> 12) & 0xF;
+                const pageNum = (fullAddress >> 8) & 0xF;
+                const pageOffset = fullAddress & 0xFF;
+                
+                // 计算全局编号
+                const globalSectorNum = blockNum * 16 + sectorNum;
+                const globalPageNum = globalSectorNum * 16 + pageNum;
+                
+                // 组装结果
+                let html = `
+                    <h3>地址 0x${fullAddress.toString(16).padStart(6, '0').toUpperCase()} 解析结果:</h3>
+                    <ul>
+                        <li>块号: ${blockNum} (0x${blockNum.toString(16).toUpperCase()})</li>
+                        <li>块内扇区号: ${sectorNum} (0x${sectorNum.toString(16).toUpperCase()})</li>
+                        <li>扇区内页号: ${pageNum} (0x${pageNum.toString(16).toUpperCase()})</li>
+                        <li>页内偏移: ${pageOffset} (0x${pageOffset.toString(16).padStart(2, '0').toUpperCase()})</li>
+                        <li>全局扇区号: ${globalSectorNum} (共4096个)</li>
+                        <li>全局页号: ${globalPageNum} (共65536个)</li>
+                    </ul>
+                `;
+                
+                resultDiv.innerHTML = html;
+                resultDiv.style.display = 'block';
+            }
+        </script>
+    </div>
+</body>
+</html>
